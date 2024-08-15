@@ -185,9 +185,6 @@
     <Compile Include="WGenMemes.xaml.cs">
       <DependentUpon>WGenMemes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WGenQR.xaml.cs">
-      <DependentUpon>WGenQR.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WorkWithFiles.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -202,10 +199,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="WGenMemes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WGenQR.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
