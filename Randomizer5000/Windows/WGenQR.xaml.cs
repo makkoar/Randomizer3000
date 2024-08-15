@@ -21,7 +21,7 @@ public partial class WGenQR : Window
                 encoder.Save(stream);
                 Notification.Show("QR-код сохранён.", new TimeSpan(0, 0, 2));
             }
-            else Notification.Show("Не удалось сохранить QR-код, так как поле ввода пустое и QR-код не был сгенерирован.", new TimeSpan(0, 0, 2));
+            else Notification.Show("Не удалось сохранить QR-код, так как QR-код не был сгенерирован.", new TimeSpan(0, 0, 2));
         };
 
         btnOpenFolder.Click += (s, e) =>
