@@ -1,7 +1,4 @@
 ﻿using QRCoder;
-using System.Diagnostics;
-using System.IO;
-using System.Windows.Media.Imaging;
 
 namespace Randomizer5000;
 public partial class WGenQR : Window

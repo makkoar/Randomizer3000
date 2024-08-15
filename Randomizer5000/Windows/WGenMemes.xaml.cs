@@ -1,12 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Threading;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows;
-using System.IO;
-using System;
-
-namespace Randomizer3000
+﻿namespace Randomizer3000
 {
     public partial class WGenMemes : Window
     {
@@ -33,7 +25,7 @@ namespace Randomizer3000
             //        ProgressBar.Visibility = Visibility.Hidden;
             //    }
             //};
-            
+
             //Timer.Start();
         }
 

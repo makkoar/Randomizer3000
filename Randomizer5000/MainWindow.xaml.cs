@@ -1,5 +1,4 @@
 ﻿namespace Randomizer5000;
-
 public partial class MainWindow : Window
 {
     public MainWindow()

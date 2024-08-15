@@ -1,8 +1,6 @@
 ﻿using Randomizer5000.Enums;
-using System.Text.RegularExpressions;
 
 namespace Randomizer5000;
-
 public partial class WGenPass : Window
 {
     private readonly Random rnd = new();

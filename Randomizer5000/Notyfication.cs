@@ -1,5 +1,4 @@
 ﻿namespace Randomizer5000;
-
 public class Notification
 {
     public async static void Show(string text, TimeSpan time)
