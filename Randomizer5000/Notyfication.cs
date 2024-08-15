@@ -17,9 +17,11 @@ public class Notification
             BorderBrush = Brushes.White,
             Foreground = Brushes.White,
             IsEnabled = false,
+            TextWrapping = TextWrapping.Wrap,
             Text = text,
             Opacity = 0,
-            Height = 20
+            MaxWidth = 200,
+            MinHeight = 20
         };
 
         Grid.SetColumnSpan(Notifications, grid.ColumnDefinitions.Count + 1);

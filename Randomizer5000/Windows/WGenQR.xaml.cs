@@ -1,39 +1,52 @@
-﻿using System.Windows.Controls;
-using Microsoft.Win32;
-using System.Windows;
-//using QRCoder;
-using System;
+﻿using QRCoder;
+using System.Diagnostics;
+using System.IO;
+using System.Windows.Media.Imaging;
 
-namespace Randomizer3000
+namespace Randomizer5000;
+public partial class WGenQR : Window
 {
-    public partial class WGenQR : Window
+    public WGenQR()
     {
-        public WGenQR()
+        InitializeComponent();
+        Directory.CreateDirectory("QR-коды");
+
+        Input.TextChanged += (s, e) => GenQR(Input.Text);
+
+        btnSaveQR.Click += (s, e) =>
         {
-            InitializeComponent();
-            //try
-            //{
-            //    BGenQR.Click += (s, e) =>
-            //    {
-            //        OpenFileDialog FileDialog = new OpenFileDialog { Filter = "Все файлы|*.*" };
-            //        if ((bool)FileDialog.ShowDialog()) GenQR(QrCodeImage, WorkWithFiles.ReadAllFile(FileDialog.FileName));
-            //        else new Notyfication() { Text = "Вы не выбрали файл!" }.Show(grid, 1, 2, new TimeSpan(0, 0, 2));
-            //    };
-            //}
-            //catch (Exception ex) { BugReport.Create(ex); }
-        }
-        public void GenQR(Image Image, string Text)
+
+            if (QRCodeImage.Source is BitmapSource bitmapSource)
+            {
+                using FileStream stream = new FileStream($"QR-коды\\{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.png", FileMode.Create);
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                encoder.Save(stream);
+                Notification.Show("QR-код сохранён.", new TimeSpan(0, 0, 2));
+            }
+            else Notification.Show("Не удалось сохранить QR-код, так как поле ввода пустое и QR-код не был сгенерирован.", new TimeSpan(0, 0, 2));
+        };
+
+        btnOpenFolder.Click += (s, e) =>
         {
-            //try
-            //{
-            //    Image.Source = null;
-            //    if (Text == "") { new Notyfication() { Text = "Файл пустой" }.Show(grid, 1, 2, new TimeSpan(0, 0, 2)); return; }
-            //    else
-            //        try { Image.Source = Core.BitmapToImage(new QRCode(new QRCodeGenerator().CreateQrCode(Text, QRCodeGenerator.ECCLevel.Q)).GetGraphic(20)); }
-            //        catch { new Notyfication() { Text = "Слишком большой файл! В файле должно быть не больше 3993 символов!" }.Show(grid, 1, 2, new TimeSpan(0, 0, 4)); }
-            //}
-            //catch (Exception ex) { BugReport.Create(ex); }
-        }
+            Directory.CreateDirectory("QR-коды");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe",
+                Arguments = "QR-коды",
+                UseShellExecute = true
+            });
+        };
     }
-    
+
+    public void GenQR(string Text)
+    {
+        QRCodeImage.Source = null;
+        try
+        {
+            if (!string.IsNullOrWhiteSpace(Text)) QRCodeImage.Source = Core.BitmapToImage(new QRCode(new QRCodeGenerator().CreateQrCode(Text, QRCodeGenerator.ECCLevel.Q)).GetGraphic(20));
+            else Notification.Show("Поле ввода пустое. Пожалуйста введите текст.", new TimeSpan(0, 0, 2)); return;
+        }
+        catch (Exception ex) { Notification.Show($"Ошибка: {ex.Message}", new TimeSpan(0, 0, 2)); }
+    }
 }
