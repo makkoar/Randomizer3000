@@ -57,7 +57,7 @@ public partial class WGenPass : Window
         });
 
         Clipboard.SetText(result);
-        new Notification().Show("Пароль скопирован в буфер обмена!", new TimeSpan(0, 0, 2));
+        Notification.Show("Пароль скопирован в буфер обмена!", new TimeSpan(0, 0, 2));
         return result;
     }
 
